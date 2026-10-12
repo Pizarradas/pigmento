@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Pigmento · Fase 0</title>
+  <meta name="description" content="Siete rupturas de la pintura, del carbón en la cueva a la imagen generada con IA, pintadas en tiempo real mientras se lee.">
+  <script type="module" src="./src/main.js"></script>
+</head>
+<body class="pigmento-body">
+  <a class="syx-sr-only syx-sr-only-focusable" href="#contenido" data-i18n="skip">Saltar al contenido</a>
+
+  <canvas class="pigmento-stage" aria-hidden="true"></canvas>
+
+  <header class="pigmento-intro pigmento-grid">
+    <p class="pigmento-kicker" data-i18n="intro.kicker">Pigmento · Prototipo</p>
+    <h1 class="pigmento-display">Pigmento</h1>
+    <p class="pigmento-lede" data-i18n="intro.lede">Siete rupturas de la pintura, del carbón en la pared de una cueva a la imagen generada con IA, pintadas mientras lees. Cada capítulo simula su técnica: carboncillo, acuarela, puntos de color puro, acrílico y difusión.</p>
+    <nav class="pigmento-index" aria-label="Capítulos" data-i18n-attr="aria-label:index.label">
+      <ol class="pigmento-index__list">
+        <li><a class="atom-link atom-link--primary" href="#prehistoria" data-i18n="index.c1">1 · Prehistoria</a></li>
+        <li><a class="atom-link atom-link--primary" href="#renacimiento" data-i18n="index.c2">2 · Renacimiento</a></li>
+        <li><a class="atom-link atom-link--primary" href="#anatomia" data-i18n="index.anatomy">Interludio · Anatomía</a></li>
+        <li><a class="atom-link atom-link--primary" href="#romanticismo" data-i18n="index.c3">3 · Romanticismo</a></li>
+        <li><a class="atom-link atom-link--primary" href="#puntillismo" data-i18n="index.c4">4 · Puntillismo</a></li>
+        <li><a class="atom-link atom-link--primary" href="#campo-de-color" data-i18n="index.c5">5 · Campo de color</a></li>
+        <li><a class="atom-link atom-link--primary" href="#pop" data-i18n="index.c6">6 · Pop</a></li>
+        <li><a class="atom-link atom-link--primary" href="#ia" data-i18n="index.c7">7 · Arte con IA</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <!-- 1 · Prehistoria · O12 ruptura a sangre: el lienzo sale de la retícula hasta el borde -->
+    <section class="pigmento-chapter" id="prehistoria" aria-labelledby="titulo-prehistoria">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--sangre">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="c1.number">Capítulo 1 · hace c. 36 000 años</p>
+          <h2 class="pigmento-chapter__title" id="titulo-prehistoria" data-i18n="c1.title">Prehistoria</h2>
+          <p class="pigmento-chapter__rupture" data-i18n="c1.rupture">Nace la imagen.</p>
+          <p class="pigmento-chapter__body" data-i18n="c1.body">En Chauvet, hace unos 36 000 años, ya se dibuja con carbón sobre la caliza. En Altamira, hace unos 15 000, los bisontes se pintan con ocre rojo y negro sobre las lomas del techo: el relieve de la roca da el volumen del animal.</p>
+          <dl class="pigmento-cartela">
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.technique">Técnica</dt><dd data-i18n="c1.technique">Ocre, carbón y grabado sobre roca</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.process">Proceso</dt><dd data-live="stage">La antorcha descubre la pared</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.strokes">Trazos</dt><dd data-live="strokes">0</dd></div>
+          </dl>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="cueva">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="c1.hint">Explora con el puntero: la antorcha es tuya</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <figcaption class="syx-sr-only" data-i18n="c1.caption">Pintura rupestre generativa: una antorcha recorre una pared de caliza con lomas; sobre ellas se dibuja a carbón un bisonte, se rellena de ocre rojo soplado y se pintan en negro la cabeza, la crinera y las pezuñas. La luz rasante sobre el relieve da volumen al animal.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · Renacimiento · O7 espejo: lienzo a la izquierda, texto a la derecha -->
+    <section class="pigmento-chapter" id="renacimiento" aria-labelledby="titulo-renacimiento">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--espejo">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="c2.number">Capítulo 2 · 1420–1520</p>
+          <h2 class="pigmento-chapter__title" id="titulo-renacimiento" data-i18n="c2.title">Renacimiento</h2>
+          <p class="pigmento-chapter__rupture" data-i18n="c2.rupture">El cuadro como ventana.</p>
+          <p class="pigmento-chapter__body" data-i18n-html="c2.body.html">En 1435 Alberti explica en <i>De pictura</i> cómo construir un suelo en perspectiva desde un punto de fuga. El carboncillo fija la construcción; el difumino modela el volumen sin línea, como hará Leonardo con el sfumato.</p>
+          <dl class="pigmento-cartela">
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.technique">Técnica</dt><dd data-i18n="c2.technique">Carboncillo y tiza sobre papel azul</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.process">Proceso</dt><dd data-live="stage">Horizonte y punto de fuga</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.strokes">Trazos</dt><dd data-live="strokes">0</dd></div>
+          </dl>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="perspectiva">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="c2.hint">Mueve el puntero: llevas la lámpara del taller</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <figcaption class="syx-sr-only" data-i18n="c2.caption">Dibujo generativo al carboncillo sobre papel azul: la construcción en perspectiva de un suelo ajedrezado con su punto de fuga y una esfera modelada con difumino, con luces de tiza blanca.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interludio · Anatomía de un cuadro · isometría real (SYX isometric) -->
+    <section class="pigmento-chapter pigmento-anatomia" id="anatomia" aria-labelledby="titulo-anatomia">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--anatomia">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="an.number">Interludio · óleo sobre lienzo, desde el siglo XVI</p>
+          <h2 class="pigmento-chapter__title pigmento-anatomia__title" id="titulo-anatomia" data-i18n="an.title">Anatomía de un cuadro</h2>
+          <p class="pigmento-chapter__body" data-i18n="an.body">Un óleo sobre lienzo es una pila de capas. Al bajar, la pila se encaja a carboncillo y cada capa se pinta en su orden, de la madera al barniz; al final la pila se cierra en el cuadro. Los grosores están exagerados.</p>
+          <ol class="pigmento-anatomia__list">
+            <li class="pigmento-anatomia__item" data-layer="0"><span class="pigmento-anatomia__name" data-i18n="an.l0.name">Bastidor</span> <span class="pigmento-anatomia__desc" data-i18n="an.l0.desc">Marco de madera con cuñas en las esquinas para tensar la tela.</span></li>
+            <li class="pigmento-anatomia__item" data-layer="1"><span class="pigmento-anatomia__name" data-i18n="an.l1.name">Lienzo</span> <span class="pigmento-anatomia__desc" data-i18n="an.l1.desc">Tela de lino clavada al bastidor. Venecia la generaliza en el siglo XVI.</span></li>
+            <li class="pigmento-anatomia__item" data-layer="2"><span class="pigmento-anatomia__name" data-i18n="an.l2.name">Encolado</span> <span class="pigmento-anatomia__desc" data-i18n="an.l2.desc">Cola animal que sella la fibra para que el aceite no la dañe.</span></li>
+            <li class="pigmento-anatomia__item" data-layer="3"><span class="pigmento-anatomia__name" data-i18n="an.l3.name">Preparación</span> <span class="pigmento-anatomia__desc" data-i18n="an.l3.desc">Capa blanca de yeso y cola, o de blanco de plomo, que deja la superficie lisa.</span></li>
+            <li class="pigmento-anatomia__item" data-layer="4"><span class="pigmento-anatomia__name" data-i18n="an.l4.name">Dibujo subyacente</span> <span class="pigmento-anatomia__desc" data-i18n="an.l4.desc">Encaje de la composición a carboncillo o a pincel.</span></li>
+            <li class="pigmento-anatomia__item" data-layer="5"><span class="pigmento-anatomia__name" data-i18n="an.l5.name">Imprimatura</span> <span class="pigmento-anatomia__desc" data-i18n="an.l5.desc">Veladura de un solo tono que quita el blanco y da el valor medio.</span></li>
+            <li class="pigmento-anatomia__item" data-layer="6"><span class="pigmento-anatomia__name" data-i18n="an.l6.name">Capas pictóricas</span> <span class="pigmento-anatomia__desc" data-i18n="an.l6.desc">Óleo de oscuro a claro: empastes en las luces, veladuras en las sombras.</span></li>
+            <li class="pigmento-anatomia__item" data-layer="7"><span class="pigmento-anatomia__name" data-i18n="an.l7.name">Barniz</span> <span class="pigmento-anatomia__desc" data-i18n="an.l7.desc">Resina transparente que protege la pintura y aviva el color.</span></li>
+          </ol>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="anatomy">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="an.hint">Señala una capa en la lista y se levanta</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <svg class="pigmento-anatomia__leaders" aria-hidden="true"></svg>
+            <ol class="pigmento-anatomia__badges" aria-hidden="true">
+              <li class="pigmento-anatomia__badge">1</li>
+              <li class="pigmento-anatomia__badge">2</li>
+              <li class="pigmento-anatomia__badge">3</li>
+              <li class="pigmento-anatomia__badge">4</li>
+              <li class="pigmento-anatomia__badge">5</li>
+              <li class="pigmento-anatomia__badge">6</li>
+              <li class="pigmento-anatomia__badge">7</li>
+              <li class="pigmento-anatomia__badge">8</li>
+            </ol>
+            <figcaption class="syx-sr-only" data-i18n="an.caption">Vista isométrica de un óleo sobre lienzo en ocho capas apiladas: bastidor, lienzo, encolado, preparación, dibujo subyacente, imprimatura, capas pictóricas con un bodegón y barniz.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · Romanticismo · O10 gradiente de densidad: pistas φ -->
+    <section class="pigmento-chapter" id="romanticismo" aria-labelledby="titulo-romanticismo">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--progresiva">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="c3.number">Capítulo 3 · c. 1800–1850</p>
+          <h2 class="pigmento-chapter__title" id="titulo-romanticismo" data-i18n="c3.title">Romanticismo</h2>
+          <p class="pigmento-chapter__rupture" data-i18n="c3.rupture">La luz disuelve la forma.</p>
+          <p class="pigmento-chapter__body" data-i18n="c3.body">Turner deja que el agua decida dónde acaba el cielo. La acuarela se pinta húmeda sobre húmeda; al secar, el pigmento se acumula en el borde y se posa en el grano del papel.</p>
+          <dl class="pigmento-cartela">
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.technique">Técnica</dt><dd data-i18n="c3.technique">Acuarela sobre papel</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.process">Proceso</dt><dd data-live="stage">Aguada de cielo</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.wet">Humedad</dt><dd data-live="wet">100 %</dd></div>
+          </dl>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="watercolor">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="c3.hint">Pasa el puntero: una esponja húmeda levanta el color</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <figcaption class="syx-sr-only" data-i18n="c3.caption">Acuarela generativa: un atardecer sobre el mar. Las aguadas de amarillo, naranja y gris se funden en húmedo; al secar aparecen los bordes oscuros y el granulado del papel.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · Puntillismo · retícula compuesta: el lienzo arranca en la línea de tercios -->
+    <section class="pigmento-chapter" id="puntillismo" aria-labelledby="titulo-puntillismo">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--compuesta">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="c4.number">Capítulo 4 · 1884–1891</p>
+          <h2 class="pigmento-chapter__title" id="titulo-puntillismo" data-i18n="c4.title">Puntillismo</h2>
+          <p class="pigmento-chapter__rupture" data-i18n="c4.rupture">El color se mezcla en el ojo.</p>
+          <p class="pigmento-chapter__body" data-i18n="c4.body">Seurat y Signac leen a Chevreul y a Rood y dejan de mezclar en la paleta. Ponen toques puros, uno junto a otro, y la mezcla ocurre en la retina de quien mira.</p>
+          <ol class="pigmento-steps">
+            <li class="pigmento-steps__item" data-step="0" data-i18n="c4.step0">En la paleta, cada color sigue puro.</li>
+            <li class="pigmento-steps__item" data-step="1" data-i18n="c4.step1">De cerca, solo hay puntos.</li>
+            <li class="pigmento-steps__item" data-step="2" data-i18n="c4.step2">De lejos, tu ojo los mezcla.</li>
+          </ol>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="pointillism">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="c4.hint">Pasa el puntero: mira los puntos de cerca</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <figcaption class="syx-sr-only" data-i18n="c4.caption">Puntillismo generativo: miles de toques de ocho colores puros viajan desde la paleta hasta formar un paisaje de río al atardecer. De cerca se ven los puntos; de lejos, el paisaje.</figcaption>
+          </figure>
+          <ul class="pigmento-palette" aria-label="Paleta de ocho pigmentos puros" data-i18n-attr="aria-label:c4.palette">
+            <li class="pigmento-palette__swatch" data-pigment="0"><span class="pigmento-palette__name" data-i18n="c4.p0">Ultramar</span></li>
+            <li class="pigmento-palette__swatch" data-pigment="1"><span class="pigmento-palette__name" data-i18n="c4.p1">Cobalto</span></li>
+            <li class="pigmento-palette__swatch" data-pigment="2"><span class="pigmento-palette__name" data-i18n="c4.p2">Esmeralda</span></li>
+            <li class="pigmento-palette__swatch" data-pigment="3"><span class="pigmento-palette__name" data-i18n="c4.p3">Verde</span></li>
+            <li class="pigmento-palette__swatch" data-pigment="4"><span class="pigmento-palette__name" data-i18n="c4.p4">Amarillo</span></li>
+            <li class="pigmento-palette__swatch" data-pigment="5"><span class="pigmento-palette__name" data-i18n="c4.p5">Bermellón</span></li>
+            <li class="pigmento-palette__swatch" data-pigment="6"><span class="pigmento-palette__name" data-i18n="c4.p6">Violeta</span></li>
+            <li class="pigmento-palette__swatch" data-pigment="7"><span class="pigmento-palette__name" data-i18n="c4.p7">Blanco</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Campo de color · banda: texto arriba en dos columnas, lienzo de lado a lado -->
+    <section class="pigmento-chapter" id="campo-de-color" aria-labelledby="titulo-campo">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--banda">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="c5.number">Capítulo 5 · 1952–1970</p>
+          <h2 class="pigmento-chapter__title" id="titulo-campo" data-i18n="c5.title">Campo de color</h2>
+          <p class="pigmento-chapter__rupture" data-i18n="c5.rupture">La pintura tiñe la tela.</p>
+          <p class="pigmento-chapter__body" data-i18n="c5.body">Frankenthaler vierte pintura muy diluida sobre algodón sin imprimar y deja que la tela la absorba. Desde 1962 usa acrílico, que no deja el halo aceitoso del óleo y tiñe el algodón como un tinte.</p>
+          <dl class="pigmento-cartela">
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.technique">Técnica</dt><dd data-i18n="c5.technique">Acrílico diluido sobre algodón crudo</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.process">Proceso</dt><dd data-live="stage">Primer vertido sobre algodón crudo</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.tilt">Pendiente</dt><dd data-live="tilt">0°</dd></div>
+          </dl>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="stain">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="c5.hint">Mueve el puntero: inclinas el bastidor</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <figcaption class="syx-sr-only" data-i18n="c5.caption">Pintura generativa de manchas: cuatro vertidos de acrílico diluido, azul, magenta, ocre y verde, se extienden sobre lienzo crudo y corren según la inclinación del bastidor.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Pop · O7 espejo: la serigrafía entra fuera de registro y encaja -->
+    <section class="pigmento-chapter" id="pop" aria-labelledby="titulo-pop">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--espejo">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="c6.number">Capítulo 6 · 1958–1970</p>
+          <h2 class="pigmento-chapter__title" id="titulo-pop" data-i18n="c6.title">Pop</h2>
+          <p class="pigmento-chapter__rupture" data-i18n="c6.rupture">La pintura sale de fábrica.</p>
+          <p class="pigmento-chapter__body" data-i18n="c6.body">El acrílico de base agua llega a los artistas a mediados de los cincuenta. Seca en minutos y permite capas planas y opacas, bordes de cinta limpios y tramas de imprenta copiadas a mano o serigrafiadas.</p>
+          <dl class="pigmento-cartela">
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.technique">Técnica</dt><dd data-i18n="c6.technique">Acrílico opaco, cinta y serigrafía</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.process">Proceso</dt><dd data-live="stage">Fondo amarillo a rodillo</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.layers">Capas</dt><dd data-live="layers">0 de 4</dd></div>
+          </dl>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="pop">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="c6.hint">Mueve el puntero: desajustas la pantalla</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <figcaption class="syx-sr-only" data-i18n="c6.caption">Pintura generativa de bordes duros: fondo amarillo a rodillo, tiras de cinta, capa roja encima, retirada de la cinta que deja franjas amarillas limpias, un disco azul y una trama de puntos Ben-Day que entra en registro.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · Arte con IA · O12 a sangre otra vez: cierra el círculo con la cueva -->
+    <section class="pigmento-chapter pigmento-ia" id="ia" aria-labelledby="titulo-ia">
+      <div class="pigmento-chapter__pin pigmento-chapter__pin--sangre">
+        <div class="pigmento-chapter__text">
+          <p class="pigmento-chapter__number" data-i18n="c7.number">Capítulo 7 · 2014–hoy</p>
+          <h2 class="pigmento-chapter__title" id="titulo-ia" data-i18n="c7.title">Arte con IA</h2>
+          <p class="pigmento-chapter__rupture" data-i18n="c7.rupture">La imagen se pide con palabras.</p>
+          <p class="pigmento-chapter__body" data-i18n="c7.body">Desde 2022, los modelos de difusión generan imágenes a partir de una frase. Parten de ruido puro y lo limpian paso a paso hasta que encaja con el texto. Aprenden de millones de imágenes ajenas, y eso abre el debate sobre la autoría y los derechos.</p>
+          <dl class="pigmento-cartela">
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.technique">Técnica</dt><dd data-i18n="c7.technique">Difusión latente</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="c7.mode">Partida</dt><dd><div class="mol-btn-group">
+              <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm" type="button" data-ai-mode="img" aria-pressed="true" data-i18n="c7.mode.img">La cueva</button>
+              <button class="atom-btn atom-btn--primary atom-btn--size-sm" type="button" data-ai-mode="txt" aria-pressed="false" data-i18n="c7.mode.txt">Ruido puro</button>
+            </div></dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.prompt">Instrucción</dt><dd class="pigmento-prompt" data-live="prompt">redibuja este bisonte como un estudio realista a carboncillo sobre papel, luz lateral, pelo detallado</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.process">Proceso</dt><dd data-live="stage">Imagen de partida: el bisonte de la cueva</dd></div>
+            <div class="pigmento-cartela__row"><dt data-i18n="dt.steps">Pasos</dt><dd data-live="steps">0 de 36</dd></div>
+          </dl>
+        </div>
+        <div class="pigmento-chapter__stage">
+          <figure class="pigmento-lienzo" data-scene="ai">
+            <p class="pigmento-lienzo__hint" aria-hidden="true"><span class="atom-pill atom-pill--dark" data-i18n="c7.hint">Pasa el puntero: debajo sigue el ruido</span></p>
+            <p class="pigmento-lienzo__fallback" data-i18n="fallback">Este navegador no puede pintar el lienzo en tiempo real.</p>
+            <figcaption class="syx-sr-only" data-i18n="c7.caption">Imagen generativa que imita un modelo de difusión: un campo de ruido se limpia paso a paso hasta mostrar un bisonte en la pared de una cueva bajo un cielo de atardecer hecho de puntos de color, un eco de los capítulos anteriores.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pigmento-footer pigmento-grid">
+    <p class="pigmento-footer__note" data-i18n-html="footer.note.html">Añade <code>?hud</code> a la dirección para ver el tiempo de frame y el nivel de calidad. Con «reducir movimiento» activado en el sistema, los capítulos aparecen terminados, sin scroll fijado.</p>
+    <p class="pigmento-footer__credit" data-i18n="footer.credit">Diseñado y desarrollado por José Luis Pizarro</p>
+  </footer>
+
+  <nav class="pigmento-timeline" aria-label="Línea de tiempo" data-i18n-attr="aria-label:tl.label">
+    <p class="pigmento-timeline__readout">
+      <span class="pigmento-timeline__chapter" data-tl="chapter">Del Paleolítico a hoy</span>
+      <span class="pigmento-timeline__year" data-tl="year"></span>
+    </p>
+    <div class="pigmento-timeline__track">
+      <ol class="pigmento-timeline__marks">
+        <li><a class="pigmento-timeline__mark" href="#prehistoria" data-tl-chapter="prehistoria"><span class="syx-sr-only" data-tl-mark>1 · Prehistoria, hace c. 36 000 años</span></a></li>
+        <li><a class="pigmento-timeline__mark" href="#renacimiento" data-tl-chapter="renacimiento"><span class="syx-sr-only" data-tl-mark>2 · Renacimiento, 1420–1520</span></a></li>
+        <li><a class="pigmento-timeline__mark" href="#romanticismo" data-tl-chapter="romanticismo"><span class="syx-sr-only" data-tl-mark>3 · Romanticismo, 1800–1850</span></a></li>
+        <li><a class="pigmento-timeline__mark" href="#puntillismo" data-tl-chapter="puntillismo"><span class="syx-sr-only" data-tl-mark>4 · Puntillismo, 1884–1891</span></a></li>
+        <li><a class="pigmento-timeline__mark" href="#campo-de-color" data-tl-chapter="campo-de-color"><span class="syx-sr-only" data-tl-mark>5 · Campo de color, 1952–1970</span></a></li>
+        <li><a class="pigmento-timeline__mark" href="#pop" data-tl-chapter="pop"><span class="syx-sr-only" data-tl-mark>6 · Pop, 1958–1970</span></a></li>
+        <li><a class="pigmento-timeline__mark" href="#ia" data-tl-chapter="ia"><span class="syx-sr-only" data-tl-mark>7 · Arte con IA, 2014–hoy</span></a></li>
+      </ol>
+      <ol class="pigmento-timeline__ticks" aria-hidden="true">
+        <li class="pigmento-timeline__tick" data-tl-year="-34000" data-i18n="tl.paleo">Paleolítico</li>
+        <li class="pigmento-timeline__tick pigmento-timeline__tick--break" data-tl-year="0">≈</li>
+        <li class="pigmento-timeline__tick pigmento-timeline__tick--minor" data-tl-year="1400">1400</li>
+        <li class="pigmento-timeline__tick pigmento-timeline__tick--minor" data-tl-year="1600">1600</li>
+        <li class="pigmento-timeline__tick" data-tl-year="1800">1800</li>
+        <li class="pigmento-timeline__tick pigmento-timeline__tick--minor" data-tl-year="1900">1900</li>
+        <li class="pigmento-timeline__tick" data-tl-year="2000">2000</li>
+      </ol>
+      <span class="pigmento-timeline__needle" aria-hidden="true"></span>
+    </div>
+    <div class="mol-btn-group pigmento-timeline__tools">
+      <button class="atom-btn atom-btn--primary atom-btn--size-sm" type="button" data-sound aria-pressed="false" data-i18n="snd.label">Sonido</button>
+      <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm" type="button" data-lang-switch="es" lang="es" aria-label="Español" aria-pressed="true">ES</button>
+      <button class="atom-btn atom-btn--primary atom-btn--size-sm" type="button" data-lang-switch="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+    </div>
+  </nav>
+
+  <output class="pigmento-hud" hidden></output>
+</body>
+</html>

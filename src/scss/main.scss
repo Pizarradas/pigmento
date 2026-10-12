@@ -1,0 +1,837 @@
+// =============================================================================
+// Pigmento · Fase 0 — hoja de estilos de la app
+// Contrato: node_modules/syx-design-system/CONSUMING.md (resumen en AGENTS.md)
+// =============================================================================
+@use 'syx-design-system/scss/abstracts/mixins/mixins' as *;
+@use 'tokens';
+
+@layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.app, syx.utilities;
+
+// Retícula compuesta 3 + 4 sobre 12 unidades (gridcalc compound --divisions 3,4)
+// Líneas: l0 · q1 (1/4) · t1 (1/3) · mid (1/2) · t2 (2/3) · q3 (3/4) · l12
+@mixin compound-columns {
+  grid-template-columns:
+    [l0] repeat(3, minmax(0, 1fr))
+    [q1] minmax(0, 1fr)
+    [t1] repeat(2, minmax(0, 1fr))
+    [mid] repeat(2, minmax(0, 1fr))
+    [t2] minmax(0, 1fr)
+    [q3] repeat(3, minmax(0, 1fr))
+    [l12];
+}
+
+@layer syx.app {
+  // ---------------------------------------------------------------------------
+  // Página
+  // ---------------------------------------------------------------------------
+  /* syx-reuse: checked atom-txt, syx-type-body — the page needs the derived 16→18 px fluid body and 1.5 leading from gridcalc */
+  .pigmento-body {
+    background: var(--pigmento-ground);
+    color: var(--pigmento-ink);
+    font-family: var(--pigmento-font-text);
+    font-size: var(--pigmento-body-size);
+    line-height: var(--pigmento-body-leading);
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    @include transition(background-color var(--pigmento-duration-ambience) var(--semantic-easing-standard), color var(--pigmento-duration-ambience) var(--semantic-easing-standard));
+  }
+
+  // Ambiente (src/motion/ambience.js): el texto propio acompaña al fondo al apagarse la página
+  .pigmento-chapter__text,
+  .pigmento-chapter__text *,
+  .pigmento-intro *,
+  .pigmento-timeline,
+  .pigmento-timeline__readout *,
+  .pigmento-timeline__tick {
+    @include transition(color var(--pigmento-duration-ambience) var(--semantic-easing-standard), background-color var(--pigmento-duration-ambience) var(--semantic-easing-standard), border-color var(--pigmento-duration-ambience) var(--semantic-easing-standard));
+  }
+
+  // El lienzo compartido: un único contexto WebGL detrás del contenido.
+  /* syx-reuse: checked layout-grid, mol-card__media — a single fixed WebGL stage behind every chapter has no SYX equivalent */
+  .pigmento-stage {
+    @include fixed($top: 0, $left: 0);
+    inline-size: 100%;
+    block-size: 100%;
+    z-index: var(--pigmento-z-stage);
+    pointer-events: none;
+  }
+
+  /* syx-reuse: checked org-site-footer, org-hero, layout-stack — page bands that only need to sit above the shared stage */
+  .pigmento-intro,
+  .pigmento-chapter,
+  .pigmento-footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Retícula compuesta 3 + 4 sobre 12 unidades (gridcalc compound --divisions 3,4)
+  // Líneas: l0 · q1 (1/4) · t1 (1/3) · mid (1/2) · t2 (2/3) · q3 (3/4) · l12
+  // Móvil: 6 columnas en uso (compose: columna ≥ 1.5 × gutter, L6).
+  // ---------------------------------------------------------------------------
+  /* syx-reuse: checked layout-grid (fixed gutter tokens, 12 plain tracks) — needs gridcalc-derived clamp() margins and the named lines of the 3 + 4 compound grid */
+  .pigmento-grid {
+    display: grid;
+    grid-template-columns: [l0] repeat(6, minmax(0, 1fr)) [l12];
+    column-gap: var(--pigmento-gutter);
+    padding-inline: var(--pigmento-margin);
+    max-inline-size: calc(var(--pigmento-content-max) + 2 * var(--pigmento-margin));
+    margin-inline: auto;
+
+    > * {
+      grid-column: l0 / l12;
+    }
+
+    @include breakpoint('laptop') {
+      @include compound-columns;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Portada
+  // ---------------------------------------------------------------------------
+  /* syx-reuse: checked org-hero (product hero with actions), atom-title--h1 — needs a poster-scale variable serif title animated on its axes */
+  .pigmento-intro {
+    min-block-size: 100svh;
+    align-content: center;
+    row-gap: var(--pigmento-gutter);
+    padding-block: var(--pigmento-section);
+  }
+
+  /* syx-reuse: checked atom-pill (badge, uppercase box) — a plain mono running label */
+  .pigmento-kicker,
+  .pigmento-chapter__number {
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-small-size);
+    line-height: var(--pigmento-small-leading);
+    letter-spacing: var(--pigmento-tracking-label);
+    text-transform: uppercase;
+    color: var(--pigmento-ink-quiet);
+  }
+
+  /* syx-reuse: checked atom-title--h1 — the display size (+5 → +9) and the SOFT axis are outside the SYX title scale */
+  .pigmento-display {
+    font-family: var(--pigmento-font-display);
+    font-size: var(--pigmento-display-size);
+    line-height: var(--pigmento-display-leading);
+    letter-spacing: var(--pigmento-tracking-display);
+    font-weight: 400;
+    font-variation-settings: 'SOFT' var(--pigmento-soft, 0), 'WONK' 0;
+  }
+
+  /* syx-reuse: checked atom-txt--primary — the lede needs the derived measure, not full width */
+  .pigmento-lede {
+    max-inline-size: var(--pigmento-measure);
+    font-size: var(--pigmento-h3-size);
+    line-height: var(--pigmento-h3-leading);
+    font-family: var(--pigmento-font-display);
+    font-variation-settings: 'SOFT' 100, 'WONK' 0;
+
+    @include breakpoint('laptop') {
+      grid-column: l0 / t2;
+      max-inline-size: none;
+    }
+  }
+
+  /* syx-reuse: checked atom-breadcrumb, org-site-header nav — an inline list of two chapter anchors */
+  .pigmento-index__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--pigmento-inner) var(--pigmento-gutter);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-small-size);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Capítulo fijado
+  // ---------------------------------------------------------------------------
+  /* syx-reuse: checked layout-stack, mol-card — a pinned full-viewport chapter whose grid changes per chapter */
+  .pigmento-chapter {
+    margin-block-start: var(--pigmento-section);
+  }
+
+  // Móvil: el texto se lee en flujo y luego se fija solo el escenario (lienzo a
+  // pantalla completa). Escritorio: se fija el capítulo entero y el escenario se
+  // disuelve en la retícula del capítulo (display: contents).
+  .pigmento-chapter__pin {
+    display: grid;
+    grid-template-columns: [l0] repeat(6, minmax(0, 1fr)) [l12];
+    column-gap: var(--pigmento-gutter);
+    row-gap: var(--pigmento-padding);
+    padding-inline: var(--pigmento-margin);
+    max-inline-size: calc(var(--pigmento-content-max) + 2 * var(--pigmento-margin));
+    margin-inline: auto;
+
+    > * {
+      grid-column: l0 / l12;
+      min-block-size: 0;
+    }
+
+    @include breakpoint('laptop') {
+      block-size: 100svh;
+      padding-block: var(--pigmento-gutter) calc(var(--pigmento-gutter) + var(--pigmento-timeline-space));
+    }
+  }
+
+  /* syx-reuse: checked layout-stack — the stage is the element pinned on small screens; on laptop it dissolves into the chapter grid */
+  .pigmento-chapter__stage {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    row-gap: var(--pigmento-padding);
+    block-size: 100svh;
+    padding-block: var(--pigmento-gutter) calc(var(--pigmento-gutter) + var(--pigmento-timeline-space));
+    // La paleta, si la hay, cae en una fila implícita «auto» bajo el lienzo
+
+    @include breakpoint('laptop') {
+      display: contents;
+    }
+  }
+
+  // Cap. 3 · O10 gradiente de densidad: pistas geométricas φ
+  // gridcalc tracks --series geometric --count 6 --ratio 1.618
+  .pigmento-chapter__pin--progresiva {
+    @include breakpoint('laptop') {
+      grid-template-columns:
+        minmax(0, 1fr) minmax(0, 1.618fr) minmax(0, 2.618fr)
+        minmax(0, 4.236fr) minmax(0, 6.854fr) minmax(0, 11.089fr);
+      grid-template-rows: minmax(0, 1fr);
+      align-items: center;
+
+      > .pigmento-chapter__text {
+        grid-column: 1 / 5;
+      }
+
+      /* syx-reuse: checked mol-card__media (image slot with fixed ratio) — the slot is a named grid area painted by the shared WebGL stage */
+      .pigmento-lienzo {
+        grid-column: 5 / 7;
+        align-self: stretch;
+      }
+    }
+  }
+
+  // Cap. 5 · retícula compuesta: el texto termina y el lienzo empieza en t1,
+  // una línea de tensión (solo la tiene la división en tercios).
+  .pigmento-chapter__pin--compuesta {
+    @include breakpoint('laptop') {
+      @include compound-columns;
+      grid-template-rows: minmax(0, 1fr) auto;
+
+      > .pigmento-chapter__text {
+        grid-column: l0 / t1;
+        grid-row: 1 / 3;
+        align-self: center;
+      }
+
+      .pigmento-lienzo {
+        grid-column: t1 / l12;
+        grid-row: 1;
+      }
+
+      /* syx-reuse: checked atom-pill, atom-avatar — swatches of pure pigment laid on a Euclidean rhythm */
+      .pigmento-palette {
+        grid-column: t1 / l12;
+        grid-row: 2;
+      }
+    }
+  }
+
+  // Cap. 1 · O12 ruptura a sangre: el lienzo sale de la retícula hasta el borde derecho
+  .pigmento-chapter__pin--sangre {
+    @include breakpoint('laptop') {
+      @include compound-columns;
+      grid-template-rows: minmax(0, 1fr);
+      align-items: center;
+
+      > .pigmento-chapter__text {
+        grid-column: l0 / t1;
+      }
+
+      .pigmento-lienzo {
+        grid-column: t1 / l12;
+        align-self: stretch;
+        margin-inline-end: calc(-1 * var(--pigmento-margin));
+      }
+    }
+  }
+
+  // Caps. 2 y 6 · O7 espejo: el lienzo a la izquierda y el texto desde la línea de dos tercios
+  .pigmento-chapter__pin--espejo {
+    @include breakpoint('laptop') {
+      @include compound-columns;
+      grid-template-rows: minmax(0, 1fr);
+      align-items: center;
+
+      > .pigmento-chapter__text {
+        grid-column: t2 / l12;
+        grid-row: 1;
+      }
+
+      .pigmento-lienzo {
+        grid-column: l0 / t2;
+        grid-row: 1;
+        align-self: stretch;
+      }
+    }
+  }
+
+  // Cap. 5 · banda: el texto arriba en dos columnas (subgrid), el lienzo de lado a lado
+  .pigmento-chapter__pin--banda {
+    @include breakpoint('laptop') {
+      @include compound-columns;
+      grid-template-rows: auto minmax(0, 1fr);
+
+      > .pigmento-chapter__text {
+        grid-column: l0 / l12;
+        // Un contenedor de consultas tiene contención de maquetación y anula subgrid:
+        // aquí el titular cabe sin cqi (columna de 2/3)
+        container-type: normal;
+        grid-template-columns: 2fr 1fr; // respaldo sin subgrid (L10)
+        column-gap: var(--pigmento-gutter);
+        align-items: end;
+
+        @supports (grid-template-columns: subgrid) {
+          grid-template-columns: subgrid;
+        }
+
+        > .pigmento-chapter__number,
+        > .pigmento-chapter__title,
+        > .pigmento-chapter__rupture {
+          grid-column: 1;
+
+          @supports (grid-template-columns: subgrid) {
+            grid-column: l0 / t2;
+          }
+        }
+
+        > .pigmento-chapter__number {
+          grid-row: 1;
+        }
+
+        > .pigmento-chapter__title {
+          grid-row: 2;
+        }
+
+        > .pigmento-chapter__rupture {
+          grid-row: 3;
+        }
+
+        /* syx-reuse: checked atom-table, mol-card — a two-column label/value museum caption with live values */
+        > .pigmento-chapter__body,
+        > .pigmento-cartela {
+          grid-column: 2;
+
+          @supports (grid-template-columns: subgrid) {
+            grid-column: t2 / l12;
+          }
+        }
+
+        > .pigmento-chapter__body {
+          grid-row: 1 / 3;
+        }
+
+        > .pigmento-cartela {
+          grid-row: 3;
+        }
+      }
+
+      .pigmento-lienzo {
+        grid-column: l0 / l12;
+        grid-row: 2;
+      }
+    }
+  }
+
+
+  // Interludio · anatomía: texto en la columna hasta t1, la pila isométrica desde t1
+  .pigmento-chapter__pin--anatomia {
+    @include breakpoint('laptop') {
+      @include compound-columns;
+      grid-template-rows: minmax(0, 1fr);
+      align-items: center;
+
+      > .pigmento-chapter__text {
+        grid-column: l0 / t1;
+      }
+
+      .pigmento-lienzo {
+        grid-column: t1 / l12;
+        align-self: stretch;
+      }
+    }
+  }
+
+  /* syx-reuse: checked atom-list, atom-progress — a numbered layer list whose active item follows the scroll and the isometric stack */
+  .pigmento-anatomia__list {
+    display: grid;
+    row-gap: var(--pigmento-micro);
+    margin: 0;
+    padding-inline-start: 3ch;
+    font-size: var(--pigmento-small-size);
+    line-height: var(--pigmento-small-leading);
+    border-block-start: var(--pigmento-rule-width) solid var(--pigmento-rule);
+    padding-block-start: var(--pigmento-inner);
+  }
+
+  .pigmento-anatomia__item {
+    color: var(--pigmento-ink-faint);
+
+    &::marker {
+      font-family: var(--pigmento-font-mono);
+    }
+
+    &.is-active {
+      color: var(--pigmento-ink-quiet);
+
+      &::marker,
+      .pigmento-anatomia__name {
+        color: var(--pigmento-accent);
+      }
+    }
+  }
+
+  .pigmento-anatomia__name {
+    font-family: var(--pigmento-font-mono);
+    color: var(--pigmento-ink);
+  }
+
+  .pigmento-anatomia__desc {
+    display: block;
+  }
+
+  // Con el recorrido guiado, solo la capa activa enseña su descripción (el lector de pantalla las oye todas)
+  .pigmento-anatomia__list.is-guided .pigmento-anatomia__item:not(.is-active) .pigmento-anatomia__desc {
+    @include sr-only;
+  }
+
+  /* syx-reuse: checked atom-avatar, atom-pill — numbered markers anchored to projected 3D points over the WebGL stage */
+  .pigmento-anatomia__badges {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pigmento-anatomia__badge {
+    @include absolute($top: 0, $left: 0);
+    display: grid;
+    place-items: center;
+    inline-size: var(--pigmento-badge-size);
+    block-size: var(--pigmento-badge-size);
+    translate: calc(var(--pigmento-anchor-x) * 1px) calc(var(--pigmento-anchor-y) * 1px - 50%);
+    border: var(--pigmento-rule-width) solid var(--pigmento-rule);
+    border-radius: var(--pigmento-badge-radius);
+    background: var(--pigmento-ground);
+    color: var(--pigmento-ink);
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-tiny-size);
+
+    &.is-active {
+      background: var(--pigmento-badge-active-bg);
+      border-color: var(--pigmento-badge-active-bg);
+      color: var(--pigmento-badge-active-ink);
+    }
+
+    .is-no-webgl & {
+      display: none;
+    }
+  }
+
+  .pigmento-anatomia__leaders {
+    @include absolute($top: 0, $left: 0);
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: visible;
+    fill: none;
+    stroke: var(--pigmento-ink-quiet);
+    stroke-width: 1;
+  }
+
+  /* syx-reuse: checked layout-stack (fixed stack gaps) — the text column follows the gridcalc proximity chain */
+  .pigmento-chapter__text {
+    container-type: inline-size;
+    display: grid;
+    align-content: start;
+    row-gap: var(--pigmento-inner);
+
+    @include breakpoint('laptop') {
+      row-gap: var(--pigmento-padding);
+    }
+  }
+
+  /* syx-reuse: checked atom-title--h2 — the chapter title runs on the +5 → +8 display steps with the SOFT axis */
+  .pigmento-chapter__title {
+    font-family: var(--pigmento-font-display);
+    // La palabra más larga (Romanticismo) mide 5,71 em medida en el navegador:
+    // 17cqi la hace caber siempre en su columna, sin partirla.
+    font-size: min(var(--pigmento-chapter-size), 17cqi);
+    line-height: var(--pigmento-display-leading);
+    letter-spacing: var(--pigmento-tracking-display);
+    font-weight: 400;
+    font-variation-settings: 'SOFT' var(--pigmento-soft, 0), 'WONK' 0;
+  }
+
+  .pigmento-chapter__rupture {
+    font-family: var(--pigmento-font-display);
+    font-size: var(--pigmento-h3-size);
+    line-height: var(--pigmento-h3-leading);
+    font-style: italic;
+    color: var(--pigmento-accent);
+  }
+
+  .pigmento-chapter__body {
+    max-inline-size: var(--pigmento-measure);
+    color: var(--pigmento-ink-quiet);
+  }
+
+  // Instrucción del capítulo 7: texto de máquina, con cursor mientras se escribe
+  /* syx-reuse: checked atom-code, atom-input — a live, read-only prompt line inside the museum caption */
+  .pigmento-prompt {
+    color: var(--pigmento-ink);
+    overflow-wrap: anywhere;
+
+    &.is-typing::after {
+      content: '▍';
+      color: var(--pigmento-accent);
+    }
+  }
+
+  // Cartela de museo con datos vivos de la simulación
+  /* syx-reuse: checked atom-table, mol-card — a two-column label/value museum caption with live values */
+  .pigmento-cartela {
+    display: grid;
+    margin: 0;
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-small-size);
+    line-height: var(--pigmento-small-leading);
+    border-block-start: var(--pigmento-rule-width) solid var(--pigmento-rule);
+  }
+
+  .pigmento-cartela__row {
+    display: grid;
+    grid-template-columns: 12ch minmax(0, 1fr); // «Instrucción» en versalitas espaciadas
+    column-gap: var(--pigmento-inner);
+    padding-block: var(--pigmento-micro);
+    border-block-end: var(--pigmento-rule-width) solid var(--pigmento-rule-subtle);
+
+    dt {
+      color: var(--pigmento-ink-faint);
+      text-transform: uppercase;
+      letter-spacing: var(--pigmento-tracking-label);
+    }
+
+    dd {
+      margin: 0;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  // Pasos del capítulo 5: todos legibles, el activo en tinta plena
+  /* syx-reuse: checked atom-list, atom-progress — a narrated step list whose active item follows the scroll */
+  .pigmento-steps {
+    display: grid;
+    row-gap: var(--pigmento-micro);
+    margin: 0;
+    padding-inline-start: 2ch;
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-small-size);
+    line-height: var(--pigmento-small-leading);
+    color: var(--pigmento-ink-faint);
+  }
+
+  .pigmento-steps__item {
+    @include transition(color var(--semantic-duration-base) var(--semantic-easing-standard));
+
+    &.is-active {
+      color: var(--pigmento-ink);
+    }
+  }
+
+  // Lienzo: el área que el motor WebGL pinta. Solo reserva el sitio.
+  /* syx-reuse: checked mol-card__media (image slot with fixed ratio) — the slot is a named grid area painted by the shared WebGL stage */
+  .pigmento-lienzo {
+    position: relative;
+    margin: 0;
+    min-block-size: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  // Con herramienta: el puntero sobre el lienzo actúa (antorcha, lámpara, esponja, lupa…)
+  .pigmento-lienzo[data-tool] {
+    cursor: crosshair;
+    touch-action: pan-y; // el dedo puede seguir haciendo scroll
+  }
+
+  // Pista de la herramienta: un atom-pill de SYX colocado en la esquina del lienzo
+  /* syx-reuse: checked atom-pill (used inside), mol-alert, atom-tooltip — needs only to sit on the canvas corner and fade while the tool is in use */
+  .pigmento-lienzo__hint {
+    @include absolute($bottom: var(--pigmento-inner), $left: var(--pigmento-inner));
+    @include transition(opacity var(--semantic-duration-slow) var(--semantic-easing-standard));
+    margin: 0;
+    pointer-events: none;
+
+    .pigmento-lienzo.is-using & {
+      opacity: 0;
+    }
+
+    .is-no-webgl & {
+      display: none;
+    }
+  }
+
+  .pigmento-lienzo__fallback {
+    display: none;
+    max-inline-size: 30ch;
+    text-align: center;
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-small-size);
+    color: var(--pigmento-ink-quiet);
+
+    .is-no-webgl & {
+      display: block;
+    }
+  }
+
+  .is-no-webgl .pigmento-lienzo {
+    background: var(--pigmento-mat);
+    border: var(--pigmento-rule-width) solid var(--pigmento-rule);
+  }
+
+  // Paleta de ocho pigmentos · O6 ritmo euclídeo E(3,8) = x..x..x.
+  // gridcalc rhythm --k 3 --n 8 → acentos 1, 4 y 7 ocupan dos módulos (8 + 3 = 11)
+  /* syx-reuse: checked atom-pill, atom-avatar — swatches of pure pigment laid on a Euclidean rhythm */
+  .pigmento-palette {
+    display: grid;
+    grid-template-columns: repeat(11, minmax(0, 1fr));
+    column-gap: var(--pigmento-inner);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pigmento-palette__swatch {
+    display: grid;
+    row-gap: var(--pigmento-micro);
+    font-size: var(--pigmento-small-size);
+    color: var(--pigmento-ink-quiet);
+    min-inline-size: 0;
+    white-space: nowrap;
+
+    &::before {
+      content: '';
+      block-size: var(--pigmento-swatch-size);
+      background: var(--pigmento-swatch, var(--pigmento-mat));
+      border: var(--pigmento-rule-width) solid var(--pigmento-rule-subtle);
+    }
+
+    &:nth-child(8n + 1),
+    &:nth-child(8n + 4),
+    &:nth-child(8n + 7) {
+      grid-column: span 2;
+    }
+
+  }
+
+  // En móvil, los nombres quedan para el lector de pantalla
+  .pigmento-palette__name {
+    @include breakpoint('mobile-only') {
+      @include sr-only;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Línea de tiempo: escala por tramos con cortes (src/timeline.js)
+  // ---------------------------------------------------------------------------
+  /* syx-reuse: checked atom-progress (one linear value), atom-breadcrumb, org-site-header — needs a piecewise historical scale with chapter spans, a scroll needle and the current year */
+  .pigmento-timeline {
+    @include fixed($left: 0, $bottom: 0);
+    inline-size: 100%;
+    z-index: var(--pigmento-z-timeline);
+    display: grid;
+    row-gap: var(--pigmento-micro);
+    padding-block: var(--pigmento-inner) calc(var(--pigmento-inner) + env(safe-area-inset-bottom, 0px));
+    padding-inline: var(--pigmento-margin);
+    background: var(--pigmento-ground);
+    border-block-start: var(--pigmento-rule-width) solid var(--pigmento-rule);
+
+    // Móvil: rótulo e idioma en la primera fila, la pista debajo a todo el ancho
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--pigmento-inner);
+
+    @include breakpoint('laptop') {
+      grid-template-columns: var(--pigmento-tl-readout-col) minmax(0, 1fr) auto;
+      column-gap: var(--pigmento-gutter);
+      align-items: center;
+    }
+  }
+
+  // Sonido y selector ES / EN: un mol-btn-group de SYX; aquí solo se coloca
+  .pigmento-timeline__tools {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+
+    @include breakpoint('laptop') {
+      grid-column: 3;
+    }
+  }
+
+  // Capítulo y año en dos líneas: el año largo (c. 23 000 a. C.) no corta el nombre,
+  // tampoco en móvil, donde la fila la comparten con Sonido y ES / EN
+  .pigmento-timeline__readout {
+    display: flex;
+    flex-direction: column;
+
+    min-inline-size: 0;
+    margin: 0;
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-small-size);
+    line-height: var(--pigmento-small-leading);
+    white-space: nowrap;
+  }
+
+  .pigmento-timeline__chapter {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pigmento-timeline__year {
+    color: var(--pigmento-accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pigmento-timeline__track {
+    grid-column: 1 / -1;
+    position: relative;
+
+    @include breakpoint('laptop') {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    block-size: calc(2 * var(--pigmento-tl-lane) + var(--pigmento-tl-ticks));
+  }
+
+  .pigmento-timeline__marks,
+  .pigmento-timeline__ticks {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // Cada capítulo: su tramo de años, con un área táctil de 24 px como mínimo
+  .pigmento-timeline__mark {
+    @include absolute($top: var(--pigmento-tl-lane), $left: calc(var(--pigmento-tl-x) * 100%));
+    display: grid;
+    align-items: center;
+    inline-size: max(var(--pigmento-tl-lane), calc(var(--pigmento-tl-w) * 100%));
+    block-size: var(--pigmento-tl-lane);
+    margin-inline-start: min(0px, calc((var(--pigmento-tl-w) * 100% - var(--pigmento-tl-lane)) / 2));
+
+    &[data-lane='1'] {
+      top: 0;
+    }
+
+    &::before {
+      content: '';
+      justify-self: center;
+      inline-size: 100%;
+      block-size: var(--pigmento-tl-bar);
+      background: var(--pigmento-ink-faint);
+      @include transition(background-color var(--semantic-duration-fast) var(--semantic-easing-standard));
+    }
+
+    &[data-narrow]::before {
+      inline-size: var(--pigmento-tl-dot);
+      block-size: var(--pigmento-tl-dot);
+    }
+
+    &:hover::before {
+      background: var(--pigmento-ink);
+    }
+
+    &[aria-current]::before {
+      background: var(--pigmento-accent);
+    }
+
+    &:focus-visible {
+      outline: var(--pigmento-rule-strong) solid var(--pigmento-focus);
+      outline-offset: var(--pigmento-micro);
+    }
+  }
+
+  // Fila de años: eje y rótulos
+  .pigmento-timeline__ticks {
+    @include absolute($bottom: 0, $left: 0);
+    inline-size: 100%;
+    block-size: var(--pigmento-tl-ticks);
+    border-block-start: var(--pigmento-rule-width) solid var(--pigmento-rule);
+  }
+
+  .pigmento-timeline__tick {
+    @include absolute($top: 0, $left: calc(var(--pigmento-tl-x) * 100%));
+    padding-inline-start: var(--pigmento-micro);
+    border-inline-start: var(--pigmento-rule-width) solid var(--pigmento-rule);
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-tiny-size);
+    line-height: var(--pigmento-tl-ticks);
+    color: var(--pigmento-ink-faint);
+    white-space: nowrap;
+  }
+
+  .pigmento-timeline__tick--break {
+    border-inline-start: 0;
+    color: var(--pigmento-ink-quiet);
+  }
+
+  .pigmento-timeline__tick--minor {
+    @include breakpoint('mobile-only') {
+      @include sr-only;
+    }
+  }
+
+  // La aguja: dónde va la lectura, en años
+  .pigmento-timeline__needle {
+    @include absolute($top: 0, $bottom: 0, $left: calc(var(--pigmento-tl-needle, 0) * 100%));
+    inline-size: var(--pigmento-rule-strong);
+    background: var(--pigmento-accent);
+    pointer-events: none;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Pie y HUD
+  // ---------------------------------------------------------------------------
+  /* syx-reuse: checked org-site-footer (links and columns) — a two-line credit footer */
+  .pigmento-footer {
+    row-gap: var(--pigmento-inner);
+    padding-block: var(--pigmento-section) calc(var(--pigmento-section) + var(--pigmento-timeline-space));
+    font-size: var(--pigmento-small-size);
+    color: var(--pigmento-ink-quiet);
+
+    @include breakpoint('laptop') {
+      > .pigmento-footer__note {
+        grid-column: l0 / t2;
+      }
+    }
+  }
+
+  .pigmento-footer__credit {
+    font-family: var(--pigmento-font-mono);
+  }
+
+  /* syx-reuse: checked mol-toast (announces an event) — a persistent developer readout of frame timing */
+  .pigmento-hud {
+    @include fixed($bottom: calc(var(--pigmento-timeline-space) + var(--pigmento-inner)), $left: var(--pigmento-inner));
+    z-index: var(--pigmento-z-hud);
+    padding: var(--pigmento-inner);
+    background: var(--pigmento-mat);
+    border: var(--pigmento-rule-width) solid var(--pigmento-rule);
+    font-family: var(--pigmento-font-mono);
+    font-size: var(--pigmento-small-size);
+    line-height: var(--pigmento-small-leading);
+    white-space: pre;
+    font-variant-numeric: tabular-nums;
+  }
+}

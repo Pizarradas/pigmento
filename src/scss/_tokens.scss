@@ -1,0 +1,166 @@
+// =============================================================================
+// Pigmento · tokens
+// Dos bloques, fuera de cualquier capa (CONSUMING.md §5 y §6):
+//   1. Overrides de tokens SYX existentes: la identidad «taller de museo».
+//      Es la versión de la Fase 0; en la Fase 1 pasa a ser el tema «pigmento».
+//   2. Tokens del proyecto --pigmento-*: leen --semantic-* o son longitudes
+//      derivadas con gridcalc.py (ley L1: ningún número sin regla).
+// =============================================================================
+
+// --- 1 · Identidad: overrides de tokens SYX existentes ----------------------
+// Color: lino crudo (claro) e imprimación de betún (oscuro). Croma de interfaz
+// bajo: el color fuerte lo pone la pintura, no la UI.
+// El tema base declara también :root[data-theme='light'] (más específico que :root):
+// sin repetir aquí ese selector, un visor con tema claro explícito impone su blanco.
+:root,
+:root[data-theme='light'] {
+  --semantic-color-bg-primary: oklch(0.955 0.012 85);
+  --semantic-color-bg-secondary: oklch(0.925 0.016 82);
+  --semantic-color-bg-tertiary: oklch(0.9 0.018 80);
+  --semantic-color-text-primary: oklch(0.24 0.02 60);
+  --semantic-color-text-secondary: oklch(0.43 0.02 60);
+  --semantic-color-text-tertiary: oklch(0.52 0.018 62);
+  --semantic-color-border-subtle: oklch(0.87 0.015 80);
+  --semantic-color-border-default: oklch(0.78 0.018 78);
+  --semantic-color-primary: oklch(0.42 0.19 268); // ultramar
+  --semantic-color-on-primary: oklch(0.975 0.01 82); // papel sobre ultramar (botón relleno)
+  --semantic-color-state-hover-primary: oklch(0.35 0.18 268);
+  --semantic-color-on-state-hover-primary: oklch(0.975 0.01 82);
+  --semantic-color-secondary: oklch(0.52 0.12 45); // siena tostada
+
+  // El tema base fija la raíz en 14 px; la retícula se derivó sobre 16 px (1rem por
+  // defecto del navegador). 100 % respeta además el tamaño que elija la persona.
+  --reset-html-font: normal normal 400 100%/1.5 var(--semantic-font-family-primary);
+
+  // Tipografía (eje 2 de BRAND)
+  --semantic-font-family-heading: 'Fraunces Variable', Georgia, serif;
+  --semantic-font-family-primary: 'Instrument Sans', system-ui, sans-serif;
+  --semantic-font-family-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --semantic-color-bg-primary: oklch(0.19 0.012 60);
+    --semantic-color-bg-secondary: oklch(0.23 0.014 60);
+    --semantic-color-bg-tertiary: oklch(0.27 0.014 60);
+    --semantic-color-text-primary: oklch(0.93 0.014 82);
+    --semantic-color-text-secondary: oklch(0.76 0.016 80);
+    --semantic-color-text-tertiary: oklch(0.66 0.016 78);
+    --semantic-color-border-subtle: oklch(0.3 0.014 60);
+    --semantic-color-border-default: oklch(0.4 0.016 62);
+    --semantic-color-primary: oklch(0.72 0.13 268);
+  --semantic-color-on-primary: oklch(0.19 0.012 60);
+  --semantic-color-state-hover-primary: oklch(0.8 0.1 268);
+  --semantic-color-on-state-hover-primary: oklch(0.19 0.012 60);
+    --semantic-color-on-primary: oklch(0.19 0.012 60);
+    --semantic-color-state-hover-primary: oklch(0.8 0.1 268);
+    --semantic-color-on-state-hover-primary: oklch(0.19 0.012 60);
+    --semantic-color-secondary: oklch(0.72 0.11 48);
+  }
+}
+
+:root[data-theme='dark'] {
+  --semantic-color-bg-primary: oklch(0.19 0.012 60);
+  --semantic-color-bg-secondary: oklch(0.23 0.014 60);
+  --semantic-color-bg-tertiary: oklch(0.27 0.014 60);
+  --semantic-color-text-primary: oklch(0.93 0.014 82);
+  --semantic-color-text-secondary: oklch(0.76 0.016 80);
+  --semantic-color-text-tertiary: oklch(0.66 0.016 78);
+  --semantic-color-border-subtle: oklch(0.3 0.014 60);
+  --semantic-color-border-default: oklch(0.4 0.016 62);
+  --semantic-color-primary: oklch(0.72 0.13 268);
+  --semantic-color-secondary: oklch(0.72 0.11 48);
+}
+
+// --- 2 · Tokens del proyecto -------------------------------------------------
+// Derivados con:
+//   gridcalc compose --font instrument-sans-latin-400-normal.woff2 --lang es
+//                    --use reading --density spacious --columns 12
+//   gridcalc compose --font fraunces-latin-full-normal.woff2 --axes wght=400,opsz=144
+//                    --use scanning --heading-steps 9   (escala 1.25)
+:root {
+  // Color: solo roles semánticos
+  --pigmento-ground: var(--semantic-color-bg-primary);
+  --pigmento-mat: var(--semantic-color-bg-secondary);
+  --pigmento-ink: var(--semantic-color-text-primary);
+  --pigmento-ink-quiet: var(--semantic-color-text-secondary);
+  --pigmento-ink-faint: var(--semantic-color-text-tertiary);
+  --pigmento-rule: var(--semantic-color-border-default);
+  --pigmento-rule-subtle: var(--semantic-color-border-subtle);
+  --pigmento-accent: var(--semantic-color-primary-text);
+
+  // Familias
+  --pigmento-font-display: var(--semantic-font-family-heading);
+  --pigmento-font-text: var(--semantic-font-family-primary);
+  --pigmento-font-mono: var(--semantic-font-family-mono);
+
+  // Cadena de proximidad (compose · spacious): micro < inner < padding < gutter ≤ margin < section
+  --pigmento-micro: 0.25rem;
+  --pigmento-inner: 0.5rem;
+  --pigmento-padding: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+  --pigmento-gutter: clamp(1rem, 0.5833rem + 1.8519vw, 2.25rem);
+  --pigmento-margin: clamp(1rem, -1.1667rem + 9.6296vw, 7.5rem);
+  --pigmento-section: clamp(7.5rem, 7.0833rem + 1.8519vw, 8.75rem);
+  --pigmento-content-max: 75rem; // 1200 px de contenido a 1440 (compose)
+
+  // Letra de texto: 16 → 18 px, interlineado 1.5, medida 70 caracteres reales
+  --pigmento-body-size: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+  --pigmento-body-leading: 1.5;
+  --pigmento-measure: 33.213em;
+  --pigmento-paragraph-gap: 0.75lh;
+
+  // Escala 1.25 (paso −1 · +3 · +5→+8 · +5→+9), interlineados en múltiplos de u/4
+  --pigmento-small-size: clamp(0.8rem, 0.7667rem + 0.1481vw, 0.9rem);
+  --pigmento-small-leading: 1.5;
+  --pigmento-h3-size: clamp(1.9531rem, 1.8717rem + 0.3617vw, 2.1973rem);
+  --pigmento-h3-leading: 1.2;
+  --pigmento-chapter-size: clamp(3.0518rem, 1.834rem + 5.413vw, 6.7055rem);
+  --pigmento-display-size: clamp(3.0518rem, 1.275rem + 7.896vw, 8.3819rem);
+  --pigmento-display-leading: 1.15;
+  --pigmento-tracking-display: var(--semantic-letter-spacing-tight);
+  --pigmento-tracking-label: var(--semantic-letter-spacing-wide);
+
+  // Lienzo
+  --pigmento-rule-width: var(--semantic-border-width-thin);
+  --pigmento-swatch-size: 2.5rem; // 40 px: objetivo táctil > 24 px (L9)
+
+  // Movimiento: duraciones y curvas de SYX (las de scroll las marca el propio scroll)
+  --pigmento-duration-reveal: var(--semantic-duration-slow);
+  --pigmento-easing-reveal: var(--semantic-easing-out);
+  --pigmento-duration-ambience: calc(var(--semantic-duration-slow) * 2.5); // la página se apaga al entrar en la cueva
+
+  // Paso −2 de la escala 1.25: rótulos de la línea de tiempo (10,24 → 11,52 px)
+  --pigmento-tiny-size: clamp(0.64rem, 0.6133rem + 0.1185vw, 0.72rem);
+
+  // Línea de tiempo: dos carriles de 24 px (objetivo táctil, L9) + fila de años + relleno
+  --pigmento-tl-lane: 1.5rem;
+  --pigmento-tl-x: 0; // posición 0–1 en la escala; la escribe src/timeline.js en cada marca
+  --pigmento-tl-w: 0; // anchura 0–1 del tramo de años
+  --pigmento-tl-needle: 0; // posición 0–1 de la aguja
+  --pigmento-tl-ticks: 1rem;
+  --pigmento-tl-readout-col: 15rem;
+  --pigmento-tl-bar: 0.375rem;
+  --pigmento-tl-dot: 0.5rem;
+  --pigmento-timeline-space: 8rem; // móvil: rótulo e idioma encima de la pista
+  --pigmento-focus: var(--semantic-color-border-focus);
+  --pigmento-rule-strong: var(--semantic-border-width-thick);
+
+  // Anatomía: etiquetas numeradas sobre la pila isométrica
+  --pigmento-badge-size: 1.5rem; // 24 px
+  --pigmento-badge-radius: var(--semantic-border-radius-full);
+  --pigmento-badge-active-bg: var(--semantic-color-primary);
+  --pigmento-badge-active-ink: var(--semantic-color-on-primary);
+  --pigmento-anchor-x: 0; // los escribe la coreografía con la posición de cada capa
+  --pigmento-anchor-y: 0;
+
+  // Capas
+  --pigmento-z-stage: var(--semantic-z-index-base);
+  --pigmento-z-timeline: var(--semantic-z-index-sticky);
+  --pigmento-z-hud: var(--semantic-z-index-toast);
+}
+
+@media (min-width: 64em) {
+  :root {
+    --pigmento-timeline-space: 5rem; // escritorio: rótulo y pista en la misma fila
+  }
+}
